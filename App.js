@@ -79,7 +79,7 @@ export default function App() {
 
   //check for collisions
   useEffect(()=>{
-    if(marioBottom < 30 && (pipeRight > marioRight - 15 && pipeRight < marioRight + 70)){
+    if(marioBottom < 30 && (pipeRight > marioRight - 15 && pipeRight < marioRight + 60)){
       gameOver()
     }
   })
