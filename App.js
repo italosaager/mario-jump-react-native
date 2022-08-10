@@ -79,15 +79,15 @@ export default function App() {
 
   //check for collisions
   useEffect(()=>{
-    if(marioBottom < 30 && (pipeRight > marioRight - 15 && pipeRight < marioRight + 60)){
+    if(marioBottom < 30 && (pipeRight > marioRight - 15 && pipeRight < marioRight + 70)){
       gameOver()
     }
   })
 
   const gameOver = () => {
-    clearInterval(cloudsMovement)
     clearInterval(pipeMovement)
     clearInterval(fall)
+    clearInterval(cloudsMovement)
     setIsGameOver(true) 
   }
 
