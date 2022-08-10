@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TouchableWithoutFeedback, Dimensions, Image} from 'react-native';
+import { StyleSheet, View, Text, TouchableWithoutFeedback, Dimensions,} from 'react-native';
 import { set } from 'react-native-reanimated';
 import Clouds from './components/Clouds';
 import Mario from './components/Mario';
+import MarioOver from './components/MarioOver';
 import Pipe from './components/Pipe';
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
   const [isGameOver, setIsGameOver] = useState(false);
 
   const [score, setScore] = useState(0);
+
 
   const gravity = 10;
   let fall;
@@ -86,8 +88,7 @@ export default function App() {
     clearInterval(cloudsMovement)
     clearInterval(pipeMovement)
     clearInterval(fall)
-    setIsGameOver(true)    
-    
+    setIsGameOver(true) 
   }
 
   const jump = () =>{
@@ -109,7 +110,7 @@ export default function App() {
   return (
 
     <TouchableWithoutFeedback onPress={jump} onLongPress={reset} >
-            <View style={styles.container}>
+          <View style={!isGameOver ? styles.container : styles.container2}>
           <StatusBar style="auto" />
 
          {isGameOver && <Text style={{color: '#fff', fontSize: 40, fontWeight: 'bold'}}>
@@ -122,10 +123,10 @@ export default function App() {
              {'\n'}Pressione e segure para reiniciar
              </Text>}
 
-          <Mario
-          marioBottom={marioBottom}
-          marioRight={marioRight}
-          />
+             {!isGameOver ? 
+             <Mario marioBottom={marioBottom} marioRight={marioRight}/> :
+            <MarioOver marioBottom={marioBottom} marioRight={marioRight}/>   }
+          
 
           <Pipe
             pipeBottom={pipeBottom}
@@ -148,6 +149,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#87cefa',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  container2: {
+    flex: 1,
+    backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
   },
